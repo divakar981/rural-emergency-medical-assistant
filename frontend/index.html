@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Rural Emergency Medical Assistant</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/static/icon.svg" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="emergency-bar">
+    <strong data-i18n="emergencyBar">🚨 Emergency? Call 108 Now</strong>
+    <div class="emergency-actions">
+      <a href="tel:108" class="bar-btn" data-i18n="call108">Call 108</a>
+      <button class="bar-btn" onclick="scrollToId('locationSection')" data-i18n="findNearest">Find Nearest Hospital</button>
+      <button class="bar-btn" id="shareLocationTop" data-i18n="shareMyLocation">Share My Location</button>
+    </div>
+  </div>
+
+  <header id="top" class="topbar">
+    <div class="brand">
+      <div class="logo">🩺</div>
+      <div>
+        <h1 data-i18n="appTitle">AI-Powered Rural Emergency Medical Assistant</h1>
+        <p data-i18n="subtitle">Instant symptom analysis, first-aid guidance, hospital routing, and voice support for rural healthcare emergencies.</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <span class="small-label" data-i18n="chooseLang">Choose your preferred language</span>
+      <div class="language-buttons" role="group" aria-label="Language selector">
+        <button class="lang-btn" data-lang="en">English</button>
+        <button class="lang-btn" data-lang="kn">ಕನ್ನಡ</button>
+        <button class="lang-btn" data-lang="te">తెలుగు</button>
+      </div>
+      <button id="darkBtn" class="ghost" title="Dark mode">🌙</button>
+    </div>
+  </header>
+
+  <nav class="section-nav">
+    <button onclick="scrollToId('symptomSection')" data-i18n="navSymptoms">1. Symptom Analysis</button>
+    <button onclick="scrollToId('voiceSection')" data-i18n="navVoice">2. Voice Assistant</button>
+    <button onclick="scrollToId('offlineSection')" data-i18n="navOffline">3. Offline Emergency Mode</button>
+    <button onclick="scrollToId('locationSection')" data-i18n="navLocation">4. Location & Nearby Hospitals</button>
+    <button onclick="scrollToId('guideSection')" data-i18n="navGuide">5. First-Aid Guide</button>
+    <button onclick="scrollToId('medicineSection')" data-i18n="navMedicine">6. Medicine Guidance</button>
+    <button onclick="scrollToId('dashboardSection')" data-i18n="navDashboard">7. Emergency Dashboard</button>
+    <button onclick="scrollToId('tipsSection')" data-i18n="navTips">8. Health Tips</button>
+  </nav>
+
+  <main class="layout">
+    <section class="hero card">
+      <div class="hero-text">
+        <span class="badge" data-i18n="badge">Advanced rural emergency support prototype</span>
+        <h2 data-i18n="heroTitle">AI-Powered Rural Emergency Medical Assistant</h2>
+        <p data-i18n="heroText">Instant symptom analysis, first-aid guidance, hospital routing, and voice support for rural healthcare emergencies.</p>
+        <div class="hero-actions">
+          <button class="primary" onclick="scrollToId('symptomSection')">🧠 <span data-i18n="analyzeSymptomsBtn">Analyze Symptoms</span></button>
+          <button class="primary soft" onclick="scrollToId('voiceSection')">🎙️ <span data-i18n="useVoiceBtn">Use Voice Assistant</span></button>
+          <button class="primary blue" onclick="scrollToId('locationSection')">🏥 <span data-i18n="findHospitalsBtn">Find Nearby Hospitals</span></button>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="sos-card">
+          <strong data-i18n="sosTitle">Emergency Support</strong>
+          <p data-i18n="sosText">For chest pain, breathing difficulty, unconsciousness, stroke, severe bleeding, snake bite, or accident, call emergency services immediately.</p>
+          <a href="tel:108" class="bigCall">📞 108</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="card user-type-card">
+      <h3 data-i18n="userTypeTitle">Who is using the app?</h3>
+      <p class="muted" id="userTypeHelp" data-i18n="userTypeHelp">Choose user type to see simple guidance for the situation.</p>
+      <div class="user-type-grid">
+        <label><input type="radio" name="userType" value="Patient" checked /> <span data-i18n="patient">Patient</span></label>
+        <label><input type="radio" name="userType" value="Family Member" /> <span data-i18n="family">Family Member</span></label>
+        <label><input type="radio" name="userType" value="Village Health Worker" /> <span data-i18n="healthWorker">Village Health Worker</span></label>
+        <label><input type="radio" name="userType" value="Doctor" /> <span data-i18n="doctor">Doctor</span></label>
+        <label><input type="radio" name="userType" value="Ambulance Helper" /> <span data-i18n="ambulanceHelper">Ambulance Helper</span></label>
+      </div>
+      <div id="userTypeInstruction" class="instruction-box"></div>
+    </section>
+
+    <section id="voiceSection" class="card assistant-card">
+      <div class="assistant-left">
+        <div class="assistant-avatar">🤖</div>
+        <div>
+          <h3 data-i18n="assistantTitle">Manual Typing + Voice Assistant</h3>
+          <p class="muted" data-i18n="assistantText">Users who know typing can enter symptoms manually. Users who cannot type can press the voice button and speak. The assistant will reply in the selected language.</p>
+        </div>
+      </div>
+      <div class="voice-row">
+        <button id="voiceBtn" class="primary">🎙️ <span data-i18n="startVoice">Start Voice Assistant</span></button>
+        <button id="speakBtn" class="ghost">🔊 <span data-i18n="speakResult">Speak Last Result</span></button>
+        <span id="voiceStatus" class="muted"></span>
+      </div>
+    </section>
+
+    <section id="symptomSection" class="grid2">
+      <section class="card">
+        <h3 data-i18n="patientDetails">Patient Details Form</h3>
+        <div class="form-grid">
+          <label><span data-i18n="name">Patient Name</span><input id="name" data-ph="namePh" placeholder="Patient name" /></label>
+          <label><span data-i18n="age">Age</span><input id="age" type="number" min="0" max="120" data-ph="agePh" placeholder="Age" /></label>
+          <label><span data-i18n="gender">Gender</span><select id="gender"><option value="not specified">Not specified</option><option value="male">Male</option><option value="female">Female</option><option value="other">Other</option></select></label>
+          <label><span data-i18n="village">Village Name</span><input id="village" data-ph="villagePh" placeholder="Village name" /></label>
+          <label><span data-i18n="phone">Phone Number</span><input id="phone" data-ph="phonePh" placeholder="Phone number" /></label>
+          <label><span data-i18n="duration">Duration</span><select id="duration"><option value="Less than 1 hour">Less than 1 hour</option><option value="1-6 hours">1–6 hours</option><option value="1 day">1 day</option><option value="More than 2 days">More than 2 days</option><option value="More than 1 week">More than 1 week</option></select></label>
+          <label><span data-i18n="bloodGroup">Blood Group</span><select id="bloodGroup"><option value="">Select</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option><option>Unknown</option></select></label>
+          <label><span data-i18n="emergencyContact">Emergency Contact</span><input id="emergencyContact" data-ph="emergencyContactPh" placeholder="Family contact number" /></label>
+        </div>
+        <label class="full"><span data-i18n="existingDiseases">Existing Diseases</span><input id="existingDiseases" data-ph="existingDiseasesPh" placeholder="Diabetes, BP, asthma..." /></label>
+        <label class="full"><span data-i18n="currentMedicines">Current Medicines</span><input id="currentMedicines" data-ph="currentMedicinesPh" placeholder="Example: BP tablet, insulin, inhaler" /></label>
+        <label class="full"><span data-i18n="currentSymptoms">Current Symptoms</span><textarea id="symptoms" rows="6" data-ph="symptomsPh" placeholder="Example: chest pain, sweating, breathing difficulty"></textarea></label>
+        <p class="hint" data-i18n="manualHint">Manual typing is best when the user can read and type. Voice assistance is useful for elderly, illiterate, or emergency users.</p>
+      </section>
+
+      <section class="card">
+        <h3 data-i18n="vitals">Vital Signs</h3>
+        <div class="form-grid">
+          <label><span data-i18n="temperature">Temperature °C</span><input id="temperature" type="number" step="0.1" placeholder="39.5" /></label>
+          <label><span>SpO₂ %</span><input id="spo2" type="number" placeholder="95" /></label>
+          <label><span data-i18n="pulse">Pulse bpm</span><input id="pulse" type="number" placeholder="90" /></label>
+          <label><span data-i18n="bp">Blood Pressure</span><div class="bpbox"><input id="bpSys" type="number" placeholder="120" /><input id="bpDia" type="number" placeholder="80" /></div></label>
+          <label class="check"><input id="diabetes" type="checkbox" /> <span data-i18n="diabetes">Diabetes</span></label>
+          <label class="check"><input id="pregnancy" type="checkbox" /> <span data-i18n="pregnancy">Pregnancy</span></label>
+          <label class="check"><input id="childPatient" type="checkbox" /> <span data-i18n="childPatient">Child below 12 years</span></label>
+        </div>
+        <label class="full"><span data-i18n="allergyType">Do you have any medicine allergy?</span><select id="allergyType"><option value="No">No</option><option value="Paracetamol allergy">Paracetamol allergy</option><option value="Ibuprofen allergy">Ibuprofen allergy</option><option value="Aspirin allergy">Aspirin allergy</option><option value="Penicillin allergy">Penicillin allergy</option><option value="Other">Other</option></select></label>
+        <label class="full"><span data-i18n="allergy">Medicine Allergy Details</span><input id="allergy" data-ph="allergyPh" placeholder="Example: penicillin allergy" /></label>
+        <div id="safetyAlert" class="medicine-warning"></div>
+        <button id="analyzeBtn" class="primary wide">🧠 <span data-i18n="analyze">Analyze Emergency Risk</span></button>
+      </section>
+    </section>
+
+    <section id="resultCard" class="card hidden result-card">
+      <div class="result-head">
+        <div>
+          <h3 data-i18n="result">AI Emergency Result</h3>
+          <p id="emergencyMsg" class="muted"></p>
+        </div>
+        <div id="riskPill" class="riskPill">Risk</div>
+      </div>
+      <div class="case-row"><span>🆔 <b data-i18n="caseId">Emergency Case ID</b>: <strong id="caseIdText">-</strong></span><span>🤖 <b data-i18n="aiConfidence">AI Confidence</b>: <strong id="confidenceText">-</strong></span></div>
+      <div class="score-label"><span data-i18n="riskScoreLabel">Emergency Risk Score:</span> <strong id="scoreText">0/100</strong></div>
+      <div class="score-wrap"><div id="scoreBar" class="score-bar"></div></div>
+      <div class="quick-actions">
+        <button class="ghost" id="speakResultBtn">🔊 <span data-i18n="speakResult">Speak Result</span></button>
+        <button class="ghost" id="downloadReportBtn">📄 <span data-i18n="downloadReport">Download Report</span></button>
+        <button class="ghost" id="shareEmergencyBtn">📲 <span data-i18n="shareEmergency">Share Emergency Details</span></button>
+        <button class="ghost" id="qrBtn">🔳 <span data-i18n="generateQr">Generate QR Code</span></button>
+        <button class="danger" onclick="location.href='tel:108'">📞 <span data-i18n="call108">Call 108</span></button>
+      </div>
+      <div class="result-grid">
+        <div class="mini-panel"><h4 data-i18n="whyRisk">Why this risk?</h4><ul id="factorList"></ul></div>
+        <div class="mini-panel" id="guideSection"><h4 data-i18n="firstAid">First-Aid Steps</h4><ol id="firstAidList"></ol><button class="speaker" id="speakAidBtn">🔊 <span data-i18n="speakAid">Speak First-Aid Steps</span></button></div>
+        <div class="mini-panel" id="medicineSection"><h4 data-i18n="medicine">Medicine Guidance</h4><div class="medicine-warning" data-i18n="medicineSafety">Medicine guidance is only for basic awareness. Do not take medicine without doctor advice, especially for children, pregnant women, elderly people, or serious symptoms.</div><ul id="medicineList"></ul><p id="doctorWarning" class="warning"></p><button class="speaker" id="speakMedBtn">🔊 <span data-i18n="speakMedicine">Speak Medicine Guidance</span></button></div>
+        <div class="mini-panel"><h4 data-i18n="nextSteps">Next Steps</h4><ul id="nextSteps"></ul></div>
+      </div>
+      <div id="qrPanel" class="qr-panel hidden"><h4 data-i18n="qrTitle">Emergency Report QR Code</h4><p class="muted" data-i18n="qrText">Hospital staff can scan this QR to view emergency details.</p><img id="qrImage" alt="Emergency QR Code" /></div>
+      <div id="profileCard" class="profile-card hidden"></div>
+    </section>
+
+    <section id="locationSection" class="grid2">
+      <section class="card">
+        <h3 data-i18n="locationTitle">Location & Nearby Hospitals</h3>
+        <p class="muted" data-i18n="locationText">Use live GPS location or manually enter village/city/location name. Then search real hospitals and show route.</p>
+        <div class="location-actions">
+          <button id="locationBtn" class="primary">📍 <span data-i18n="liveLocation">Use Live Location</span></button>
+          <select id="radius"><option value="3000">3 km</option><option value="5000" selected>5 km</option><option value="10000">10 km</option><option value="20000">20 km</option></select>
+        </div>
+        <div class="manual-location">
+          <input id="manualLocation" data-ph="manualLocPh" placeholder="Enter village/city/location manually" />
+          <button id="manualLocationBtn" class="ghost">🔎 <span data-i18n="searchLocation">Search Location</span></button>
+        </div>
+        <p id="locationStatus" class="muted"></p>
+        <div id="routeInfo" class="route-info hidden"></div>
+        <div id="map"></div>
+      </section>
+      <section class="card">
+        <h3 data-i18n="hospitalList">Nearby Hospitals</h3>
+        <p class="muted" data-i18n="hospitalCardText">Hospital cards show name, distance, address, map, route and call option.</p>
+        <div id="hospitalList" class="hospital-list"><p class="muted" data-i18n="pressLocation">Use live location or manual location to search hospitals.</p></div>
+        <button class="speaker ghost full-btn" id="speakRouteBtn">🔊 <span data-i18n="speakRoute">Speak Hospital Route</span></button>
+      </section>
+    </section>
+
+    <section id="pharmacySection" class="card">
+      <h3 data-i18n="nearbyPharmacy">Nearby Pharmacy Search</h3>
+      <p class="muted" data-i18n="pharmacyText">Use the same live/manual location to find nearby pharmacies and medicine shops.</p>
+      <div class="doctor-actions"><button id="pharmacyBtn" class="primary">💊 <span data-i18n="findPharmacies">Find Nearby Pharmacies</span></button><button id="speakPharmacyBtn" class="ghost">🔊 <span data-i18n="speakPharmacies">Speak Pharmacy Info</span></button></div>
+      <div id="pharmacyList" class="hospital-list"><p class="muted" data-i18n="pressLocation">Use live location or manual location first.</p></div>
+    </section>
+
+    <section id="offlineSection" class="card offline-pro">
+      <h3 data-i18n="offlineTitle">Offline Emergency Mode</h3>
+      <p class="muted" data-i18n="offlineText">Enter symptoms even without internet. The app uses saved first-aid and medicine rules inside the browser.</p>
+      <div class="offline-search">
+        <input id="offlineSymptoms" data-ph="offlinePh" placeholder="Enter symptom for offline help, e.g., fever, cough, bleeding" />
+        <button id="offlineAnalyzeBtn" class="primary">🩺 <span data-i18n="offlineAnalyze">Offline Analyze</span></button>
+      </div>
+      <h4 data-i18n="visualSymptoms">Visual Symptom Buttons</h4>
+      <div class="symptom-chip-grid" id="visualSymptomButtons"></div>
+      <!-- Removed repeated text-only offline boxes. Only visual symptom buttons are shown now. -->
+      <div class="offline-library hidden" id="offlineLibrary"></div>
+      <div id="offlineResult" class="offline-result">
+        <h4 id="offlineTitleResult" data-i18n="offlineFirstAid">Offline First-Aid</h4>
+        <div class="offline-columns">
+          <div><h5 data-i18n="whatToDo">What to do</h5><ol id="offlineDoList"></ol></div>
+          <div><h5 data-i18n="whatNotToDo">What not to do</h5><ol id="offlineDontList"></ol></div>
+          <div><h5 data-i18n="whenCall108">When to call 108</h5><ol id="offlineCallList"></ol></div>
+          <div><h5 data-i18n="basicMedicine">Basic medicine guidance</h5><ul id="offlineMedicineList"></ul></div>
+        </div>
+        <p id="offlineWarn" class="warning"></p>
+        <button class="speaker ghost" id="speakOfflineBtn">🔊 <span data-i18n="speakOffline">Speak Offline Guidance</span></button>
+      </div>
+    </section>
+
+
+    <section id="ambulanceSection" class="card ambulance-card">
+      <h3 data-i18n="ambulanceTracking">Ambulance Tracking Simulation</h3>
+      <p class="muted" data-i18n="ambulanceText">Simulate ambulance request, assigned driver, vehicle number and estimated arrival time.</p>
+      <div class="doctor-actions">
+        <button id="requestAmbulanceBtn" class="danger">🚑 <span data-i18n="requestAmbulance">Request Ambulance</span></button>
+        <button id="whatsappAlertBtn" class="primary">🟢 <span data-i18n="whatsappAlert">Send WhatsApp Alert</span></button>
+      </div>
+      <div id="ambulanceStatus" class="ambulance-status muted"></div>
+    </section>
+
+    <section id="reminderVideoSection" class="grid2">
+      <section class="card">
+        <h3 data-i18n="medicineReminder">Automatic Medicine Reminder</h3>
+        <p class="muted" data-i18n="medicineReminderText">After analysis, reminders are created automatically from the medicine guidance. You can edit them before following doctor advice.</p>
+        <div id="medicineReminderList" class="logs"><p class="muted" data-i18n="analyzeFirst">Please analyze symptoms first.</p></div>
+      </section>
+      <section class="card">
+        <h3 data-i18n="videoGuide">First-Aid Video Guide</h3>
+        <p class="muted" data-i18n="videoGuideText">Quick video links for villagers and health workers. Internet is required for video playback.</p>
+        <div class="video-grid" id="videoGuideList"></div>
+      </section>
+    </section>
+
+    <section id="caseLookupSection" class="card">
+      <h3 data-i18n="caseLookup">Emergency ID Lookup</h3>
+      <p class="muted" data-i18n="caseLookupText">Enter an Emergency Case ID to view the saved patient record.</p>
+      <div class="offline-search"><input id="lookupCaseId" placeholder="EMR-20260604-ABC123" /><button id="lookupCaseBtn" class="primary">🔎 <span data-i18n="lookupRecord">Show Patient Record</span></button></div>
+      <div id="lookupResult" class="logs"></div>
+    </section>
+
+    <section id="multiPatientSection" class="card">
+      <h3 data-i18n="multiPatientRegister">Multi-Patient Register</h3>
+      <p class="muted" data-i18n="multiPatientText">Village health workers can add, search, filter and export multiple patient records.</p>
+      <div class="form-grid"><input id="multiName" data-ph="namePh" placeholder="Patient name"/><input id="multiVillage" data-ph="villagePh" placeholder="Village"/><input id="multiPhone" data-ph="phonePh" placeholder="Phone"/><input id="multiProblem" data-ph="symptomsPh" placeholder="Symptoms"/></div>
+      <div class="doctor-actions"><button id="addMultiPatient" class="primary">➕ <span data-i18n="addPatient">Add Patient</span></button><input id="patientSearch" placeholder="Search by name/village"/><button id="exportPatients" class="ghost">📄 <span data-i18n="exportPatientList">Export Patient List</span></button></div>
+      <div id="multiPatientList" class="logs"></div>
+    </section>
+
+    <section id="analyticsPlusSection" class="grid2">
+      <section class="card">
+        <h3 data-i18n="emergencyHeatmap">Emergency Heatmap</h3>
+        <p class="muted" data-i18n="heatmapText">Village-wise case count for outbreak monitoring.</p>
+        <div id="heatmapList" class="heatmap-list"></div>
+      </section>
+      <section class="card">
+        <h3 data-i18n="riskTrendChart">Risk Trend Chart</h3>
+        <p class="muted" data-i18n="riskTrendText">Visual summary of low, medium, high and critical cases.</p>
+        <div id="riskTrendBars" class="trend-bars"></div>
+      </section>
+    </section>
+
+
+    <section id="familyContactSection" class="card">
+      <h3 data-i18n="familyContacts">Emergency Family Contact List</h3>
+      <p class="muted" data-i18n="familyContactsText">Add family or village helper contacts. In a critical case, the app can prepare WhatsApp alerts for them.</p>
+      <div class="form-grid family-form">
+        <input id="familyName" data-ph="familyNamePh" placeholder="Contact name" />
+        <input id="familyRelation" data-ph="familyRelationPh" placeholder="Relation" />
+        <input id="familyPhone" data-ph="familyPhonePh" placeholder="Phone number" />
+      </div>
+      <div class="doctor-actions">
+        <button id="addFamilyContact" class="primary">➕ <span data-i18n="addContact">Add Contact</span></button>
+        <button id="alertAllContacts" class="danger">📲 <span data-i18n="alertAll">Alert All Contacts</span></button>
+        <button id="clearFamilyContacts" class="ghost">🧹 <span data-i18n="clear">Clear</span></button>
+      </div>
+      <div id="familyContactList" class="logs"></div>
+    </section>
+
+    <section id="voiceShortcutSection" class="card voice-shortcuts-card">
+      <h3 data-i18n="voiceShortcuts">Voice Command Shortcuts</h3>
+      <p class="muted" data-i18n="voiceShortcutsText">Villagers can speak simple commands. The app understands commands like find hospital, call emergency, speak first aid, show medicine, dashboard and demo mode.</p>
+      <div class="doctor-actions">
+        <button id="voiceCommandBtn" class="primary">🎙️ <span data-i18n="startVoiceCommand">Start Voice Command</span></button>
+        <button id="speakCommandsBtn" class="ghost">🔊 <span data-i18n="speakCommands">Speak Commands</span></button>
+      </div>
+      <div class="command-chips">
+        <button onclick="runVoiceCommand('find hospital')">🏥 <span data-i18n="findNearest">Find Nearest Hospital</span></button>
+        <button onclick="runVoiceCommand('call emergency')">🚑 <span data-i18n="call108">Call 108</span></button>
+        <button onclick="runVoiceCommand('speak first aid')">🔊 <span data-i18n="speakAid">Speak First-Aid Steps</span></button>
+        <button onclick="runVoiceCommand('show medicine')">💊 <span data-i18n="medicine">Medicine Guidance</span></button>
+        <button onclick="runVoiceCommand('open dashboard')">📊 <span data-i18n="dashboard">Emergency Dashboard</span></button>
+      </div>
+      <div id="voiceCommandStatus" class="muted"></div>
+    </section>
+
+    <section id="offlineNumbersSection" class="card emergency-numbers-card">
+      <h3 data-i18n="offlineEmergencyNumbers">Offline Emergency Numbers</h3>
+      <p class="muted" data-i18n="offlineEmergencyNumbersText">Important helpline numbers are available even without internet. Keep these saved for village emergency situations.</p>
+      <div id="emergencyNumbersGrid" class="numbers-grid"></div>
+    </section>
+
+    <section id="pdfReportSection" class="card pdf-card">
+      <h3 data-i18n="pdfReport">PDF Emergency Report</h3>
+      <p class="muted" data-i18n="pdfReportText">Generate a hospital-style PDF report with patient details, emergency ID, symptoms, risk, AI confidence, first-aid, medicine guidance, hospital route and QR code.</p>
+      <div class="doctor-actions">
+        <button id="downloadPdfReportBtn" class="primary">📄 <span data-i18n="downloadPdf">Download PDF Report</span></button>
+        <button id="printReportBtn" class="ghost">🖨️ <span data-i18n="printReport">Print Report</span></button>
+      </div>
+      <p id="pdfStatus" class="muted"></p>
+    </section>
+
+    <section id="dashboardSection" class="card">
+      <div class="dash-head">
+        <h3 data-i18n="dashboard">Emergency Dashboard</h3>
+        <button id="refreshLogs" class="ghost" data-i18n="refresh">Refresh</button>
+      </div>
+      <div class="stats six">
+        <div><strong id="totalCases">0</strong><span data-i18n="totalCases">Total Cases</span></div>
+        <div><strong id="criticalCases">0</strong><span data-i18n="criticalCases">Critical Cases</span></div>
+        <div><strong id="highCases">0</strong><span data-i18n="highCases">High Cases</span></div>
+        <div><strong id="commonSymptoms">-</strong><span data-i18n="commonSymptoms">Common Symptoms</span></div>
+        <div><strong id="topVillage">-</strong><span data-i18n="mostReportedVillage">Most Reported Village</span></div>
+        <div><strong id="riskChart">-</strong><span data-i18n="riskChart">Risk Chart</span></div>
+      </div>
+      <div class="dash-actions"><button id="exportCsv" class="ghost" data-i18n="export">Export CSV</button><button id="clearLogs" class="danger" data-i18n="clear">Clear</button></div>
+      <div id="outbreakAlert" class="outbreak-box"></div>
+      <h4 data-i18n="recentLogs">Recent Emergency Logs</h4>
+      <div id="recentLogs" class="logs"></div>
+    </section>
+
+    <section class="grid2">
+      <section class="card doctor-card">
+        <h3 data-i18n="doctorConnect">Connect to Doctor</h3>
+        <p class="muted" data-i18n="doctorConnectText">Simulation feature for project review. It shows how emergency details can be sent to a doctor or health worker.</p>
+        <div class="doctor-actions">
+          <button class="primary" id="requestDoctorBtn">☎️ <span data-i18n="requestDoctor">Request Doctor Call</span></button>
+          <button class="ghost" id="sendReportBtn">📤 <span data-i18n="sendEmergencyReport">Send Emergency Report</span></button>
+          <button class="ghost" id="downloadPatientReportBtn">📄 <span data-i18n="downloadPatientReport">Download Patient Report</span></button>
+        </div>
+        <p id="doctorStatus" class="muted"></p>
+      </section>
+      <section id="tipsSection" class="card tips-card">
+        <h3 data-i18n="healthTips">Health Tips</h3>
+        <ul id="tipsList"></ul>
+      </section>
+    </section>
+
+    <section id="workerSection" class="card">
+      <h3 data-i18n="workerMode">Village Health Worker Mode</h3>
+      <p class="muted" data-i18n="workerText">Register multiple village patients, track emergency cases, and export village report.</p>
+      <div class="form-grid"><input id="workerPatientName" data-ph="namePh" placeholder="Patient name" /><input id="workerVillage" data-ph="villagePh" placeholder="Village" /><input id="workerSymptom" data-ph="symptomsPh" placeholder="Symptoms" /></div>
+      <div class="doctor-actions"><button id="addWorkerCase" class="primary">➕ <span data-i18n="addCase">Add Case</span></button><button id="exportVillageReport" class="ghost">📄 <span data-i18n="exportVillageReport">Export Village Report</span></button></div>
+      <div id="workerCases" class="logs"></div>
+    </section>
+
+    <section id="historySection" class="card">
+      <h3 data-i18n="patientHistory">Saved Patient History</h3>
+      <p class="muted" data-i18n="historyText">Previous emergency reports saved in this browser.</p>
+      <div class="doctor-actions"><button id="refreshHistory" class="ghost" data-i18n="refresh">Refresh</button><button id="clearHistory" class="danger" data-i18n="clear">Clear</button></div>
+      <div id="historyList" class="logs"></div>
+    </section>
+
+    <section id="adminSection" class="card admin-card">
+      <h3 data-i18n="adminDashboard">Admin Dashboard</h3>
+      <p class="muted" data-i18n="adminText">Simple review dashboard for total patients, emergencies, villages, common symptoms and outbreak alerts.</p>
+      <div class="stats six"><div><strong id="adminPatients">0</strong><span data-i18n="totalPatients">Total Patients</span></div><div><strong id="adminEmergencies">0</strong><span data-i18n="totalEmergencies">Total Emergencies</span></div><div><strong id="adminCritical">0</strong><span data-i18n="criticalCases">Critical Cases</span></div><div><strong id="adminVillages">0</strong><span data-i18n="villagesCovered">Villages Covered</span></div><div><strong id="adminSymptom">-</strong><span data-i18n="commonSymptoms">Common Symptoms</span></div><div><strong id="adminOutbreak">-</strong><span data-i18n="outbreakStatus">Outbreak Status</span></div></div>
+    </section>
+
+    <section class="card disclaimer">
+      <strong data-i18n="important">Important:</strong>
+      <span data-i18n="disclaimer">This is an educational prototype, not a replacement for a doctor. Medicine suggestions are general OTC guidance only. For serious symptoms, call 108 or visit the nearest hospital immediately.</span>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button onclick="scrollToId('top')">🏠 <span data-i18n="home">Home</span></button>
+    <button onclick="scrollToId('symptomSection')">🧠 <span data-i18n="analyzeShort">Analyze</span></button>
+    <button onclick="scrollToId('voiceSection')">🎙️ <span data-i18n="voiceShort">Voice</span></button>
+    <button onclick="scrollToId('locationSection')">🏥 <span data-i18n="hospitalsShort">Hospitals</span></button>
+    <button onclick="scrollToId('dashboardSection')">📊 <span data-i18n="dashboardShort">Dashboard</span></button>
+  </nav>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

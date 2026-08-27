@@ -1,0 +1,12 @@
+{
+  "name": "AI Rural Emergency Medical Assistant",
+  "short_name": "Rural Med AI",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#eef8f6",
+  "theme_color": "#0f766e",
+  "icons": [
+    {"src":"/static/icon.svg","sizes":"192x192","type":"image/svg+xml"},
+    {"src":"/static/icon.svg","sizes":"512x512","type":"image/svg+xml"}
+  ]
+}

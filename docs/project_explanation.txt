@@ -1,0 +1,11 @@
+AI-Powered Rural Emergency Medical Assistant Pro
+
+This advanced version is designed like a real medical assistance prototype for rural emergency situations. It contains both manual and voice-based input so that educated users can type symptoms and elderly or illiterate users can speak symptoms. The assistant gives voice replies in the selected language: English, Kannada, or Telugu.
+
+The application provides symptom-based emergency risk prediction using symptoms and vital signs such as temperature, SpO2, pulse, and blood pressure. It also generates first-aid steps and safe medicine guidance for common problems like fever, cough, cold, diarrhea, minor wounds, burns, bleeding, and pain. The medicine section includes warnings because this is not a replacement for a doctor.
+
+The location module supports both live GPS location and manual location entry. The user can enter a village, city, or place name manually, or press the live location button. The system then searches real nearby hospitals using OpenStreetMap data and displays them on a map. The user can view a route line to a selected hospital and can also open the route in Google Maps.
+
+The Offline Emergency Mode now includes a symptom text box. The user can enter symptoms even in low-network situations, and the browser uses stored first-aid and medicine rules to give basic guidance. This is especially useful for rural areas where internet connectivity is weak.
+
+The project also includes an advanced UI, dark mode, multilingual interface, emergency 108 button, dashboard, emergency logs, CSV export, and PWA support.

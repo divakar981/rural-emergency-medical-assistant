@@ -1,0 +1,385 @@
+[
+  {
+    "timestamp": "2026-06-03T19:10:12",
+    "patient": {
+      "name": "User",
+      "age": null,
+      "gender": "not specified"
+    },
+    "risk": {
+      "score": 0,
+      "level_key": "low",
+      "risk_level": "ಕಡಿಮೆ ಅಪಾಯ",
+      "factors": [
+        "ದೊಡ್ಡ ತುರ್ತು ಸೂಚನೆ ಕಂಡುಬಂದಿಲ್ಲ."
+      ],
+      "matched": []
+    },
+    "emergency_message": "ಲಕ್ಷಣಗಳನ್ನು ಗಮನಿಸಿ. ಲಕ್ಷಣಗಳು ಹೆಚ್ಚಾದರೆ ಆರೋಗ್ಯ ಕೇಂದ್ರಕ್ಕೆ ಹೋಗಿ.",
+    "first_aid": [
+      "ಸಾಕಷ್ಟು ದ್ರವ ಪದಾರ್ಥ ಕುಡಿಯಿರಿ.",
+      "ತಂಪಾದ ಕೊಠಡಿಯಲ್ಲಿ ವಿಶ್ರಾಂತಿ ಮಾಡಿ.",
+      "ಹಗುರವಾದ ಬಟ್ಟೆ ಧರಿಸಿ.",
+      "ಜ್ವರ ತುಂಬಾ ಹೆಚ್ಚು, ನಿರಂತರ, ಉಸಿರಾಟ ತೊಂದರೆ ಅಥವಾ ಗೊಂದಲ ಇದ್ದರೆ ವೈದ್ಯರನ್ನು ಭೇಟಿ ಮಾಡಿ."
+    ],
+    "medicine_guidance": {
+      "suggestions": [
+        "ಜ್ವರ ಅಥವಾ ಸಣ್ಣ ನೋವಿಗೆ ಪ್ಯಾರಾಸಿಟಮಾಲ್/ಅಸೆಟಾಮಿನೋಫೆನ್ ಅನ್ನು ವಯಸ್ಸು/ತೂಕದ ಲೇಬಲ್ ಅಥವಾ ವೈದ್ಯರ ಸಲಹೆಯಂತೆ ಮಾತ್ರ ಬಳಸಿ.",
+        "ದುರ್ಬಲತೆ ಅಥವಾ ನೀರಿನ ಕೊರತೆ ಇದ್ದರೆ ORS ಅಥವಾ ದ್ರವ ಪದಾರ್ಥ ಕುಡಿಯಿರಿ.",
+        "ಆವಿನ ಉಸಿರಾಟ ಮತ್ತು ಬಿಸಿ ದ್ರವ ಪದಾರ್ಥಗಳು ಜಲದುಷ್ಠಿ ಲಕ್ಷಣಗಳಿಗೆ ಸಹಾಯ ಮಾಡಬಹುದು.",
+        "ಮೂಗು ಮುಚ್ಚಿಕೊಂಡಿದ್ದರೆ ಸ್ಯಾಲೈನ್ ಮೂಗು ಡ್ರಾಪ್ಸ್/ಸ್ಪ್ರೇ ಸಹಾಯ ಮಾಡಬಹುದು.",
+        "ವಿಶೇಷವಾಗಿ ಮಕ್ಕಳಿಗೆ ಕೆಮ್ಮಿನ ಸಿರಪ್ ಅನ್ನು ಫಾರ್ಮಸಿಸ್ಟ್/ವೈದ್ಯರ ಸಲಹೆಯಿಂದ ಮಾತ್ರ ಬಳಸಿ."
+      ],
+      "warnings": [
+        "ಆಂಟಿಬಯಾಟಿಕ್‌ಗಳನ್ನು ಸ್ವಯಂವಾಗಿ ತೆಗೆದುಕೊಳ್ಳಬೇಡಿ. ಗರ್ಭಾವಸ್ಥೆ, ಕಿಡ್ನಿ ಕಾಯಿಲೆ, ಹೊಟ್ಟೆ ಅಲ್ಸರ್, ಡೆಂಗ್ಯೂ ಅನುಮಾನ ಅಥವಾ ಗಂಭೀರ ನೀರಿನ ಕೊರತೆ ಇದ್ದರೆ ವೈದ್ಯರ ಸಲಹೆ ಇಲ್ಲದೆ ಐಬುಪ್ರೊಫೆನ್/NSAID ತಪ್ಪಿಸಿ.",
+        "ವೈದ್ಯರು ಹೇಳದಿದ್ದರೆ ಸಾಮಾನ್ಯ ಜಲದುಷ್ಠಿಗೆ ಆಂಟಿಬಯಾಟಿಕ್ ಬಳಸಬೇಡಿ. ಸಣ್ಣ ಮಕ್ಕಳಿಗೆ ವಯಸ್ಕರ ಜಲದುಷ್ಠಿ ಔಷಧಿ ಕೊಡಬೇಡಿ."
+      ]
+    },
+    "doctor_warning": "ಮಕ್ಕಳು, ಗರ್ಭಾವಸ್ಥೆ, ಅಲರ್ಜಿ ಅಥವಾ ದೀರ್ಘಕಾಲಿನ ಕಾಯಿಲೆಗಳಿದ್ದರೆ ಔಷಧಿ ತೆಗೆದುಕೊಳ್ಳುವ ಮೊದಲು ಅರ್ಹ ವೈದ್ಯರು ಅಥವಾ ಫಾರ್ಮಸಿಸ್ಟ್ ಸಲಹೆ ಪಡೆಯಿರಿ.",
+    "next_steps": [
+      "ಗಂಭೀರ ಸ್ಥಿತಿಯಲ್ಲಿ 108 ಗೆ ಕರೆ ಮಾಡಿ.",
+      "ಹತ್ತಿರದ ಆಸ್ಪತ್ರೆ ಹುಡುಕಲು ಲೈವ್ ಸ್ಥಳ ಬಳಸಿ.",
+      "ಅಪಾಯ ಫಲಿತಾಂಶ ಮತ್ತು ಲಕ್ಷಣಗಳನ್ನು ವೈದ್ಯರು/ಆಂಬುಲೆನ್ಸ್ ಸಿಬ್ಬಂದಿಗೆ ತೋರಿಸಿ."
+    ],
+    "voice_reply": "User, ನಿಮ್ಮ ಅಪಾಯ ಮಟ್ಟ ಕಡಿಮೆ ಅಪಾಯ. ಅಂಕ 0 / 100. ಲಕ್ಷಣಗಳನ್ನು ಗಮನಿಸಿ. ಲಕ್ಷಣಗಳು ಹೆಚ್ಚಾದರೆ ಆರೋಗ್ಯ ಕೇಂದ್ರಕ್ಕೆ ಹೋಗಿ."
+  },
+  {
+    "timestamp": "2026-06-03T19:10:12",
+    "patient": {
+      "name": "User",
+      "age": null,
+      "gender": "not specified"
+    },
+    "risk": {
+      "score": 0,
+      "level_key": "low",
+      "risk_level": "తక్కువ ప్రమాదం",
+      "factors": [
+        "పెద్ద అత్యవసర సూచన కనిపించలేదు."
+      ],
+      "matched": []
+    },
+    "emergency_message": "లక్షణాలను గమనించండి. లక్షణాలు పెరిగితే ఆరోగ్య కేంద్రానికి వెళ్లండి.",
+    "first_aid": [
+      "తగినంత ద్రవాలు తాగండి.",
+      "చల్లటి గదిలో విశ్రాంతి తీసుకోండి.",
+      "తేలికపాటి బట్టలు ధరించండి.",
+      "జ్వరం చాలా ఎక్కువగా, నిరంతరం, శ్వాస ఇబ్బంది లేదా గందరగోళంతో ఉంటే డాక్టర్‌ను సంప్రదించండి."
+    ],
+    "medicine_guidance": {
+      "suggestions": [
+        "జ్వరం లేదా స్వల్ప నొప్పికి ప్యారాసిటమాల్/అసెటామినోఫెన్‌ను వయస్సు/బరువు లేబల్ లేదా డాక్టర్ సలహా ప్రకారం మాత్రమే వాడండి.",
+        "బలహీనత లేదా నీటి లోపం ఉంటే ORS లేదా ద్రవాలు తాగండి.",
+        "ఆవిరి పీల్చడం మరియు వెచ్చని ద్రవాలు జలుబు లక్షణాలకు సహాయపడవచ్చు.",
+        "ముక్కు మూసుకుపోతే సాలైన్ నాసల్ డ్రాప్స్/స్ప్రే సహాయపడవచ్చు.",
+        "ప్రత్యేకంగా పిల్లలకు దగ్గు సిరప్‌ను ఫార్మసిస్ట్/డాక్టర్ సలహాతో మాత్రమే వాడండి."
+      ],
+      "warnings": [
+        "ఆంటీబయాటిక్స్‌ను స్వయంగా వాడవద్దు. గర్భధారణ, కిడ్నీ వ్యాధి, కడుపు అల్సర్, డెంగ్యూ అనుమానం లేదా తీవ్రమైన నీటి లోపం ఉంటే డాక్టర్ సలహా లేకుండా ఐబుప్రోఫెన్/NSAIDs నివారించండి.",
+        "డాక్టర్ చెప్పకపోతే సాధారణ జలుబుకు ఆంటీబయాటిక్ వాడవద్దు. చిన్న పిల్లలకు పెద్దల జలుబు మందులు ఇవ్వవద్దు."
+      ]
+    },
+    "doctor_warning": "పిల్లలు, గర్భధారణ, అలెర్జీలు లేదా దీర్ఘకాలిక వ్యాధులు ఉంటే మందులు తీసుకునే ముందు అర్హత కలిగిన డాక్టర్ లేదా ఫార్మసిస్ట్‌ను సంప్రదించండి.",
+    "next_steps": [
+      "స్థితి తీవ్రమైతే 108 కు కాల్ చేయండి.",
+      "సమీప ఆసుపత్రులు కనుగొనడానికి లైవ్ లొకేషన్ వాడండి.",
+      "రిస్క్ ఫలితం మరియు లక్షణాలను డాక్టర్/అంబులెన్స్ సిబ్బందికి చూపండి."
+    ],
+    "voice_reply": "User, మీ ప్రమాద స్థాయి తక్కువ ప్రమాదం. స్కోర్ 0 / 100. లక్షణాలను గమనించండి. లక్షణాలు పెరిగితే ఆరోగ్య కేంద్రానికి వెళ్లండి."
+  },
+  {
+    "case_id": "EMR-20260604-60DD80",
+    "ai_confidence": 69,
+    "ai_explanation": [
+      "Symptom matched: chest pain (+35)"
+    ],
+    "timestamp": "2026-06-04T03:09:33",
+    "patient": {
+      "name": "Divakar GK",
+      "age": 20,
+      "gender": "male",
+      "user_type": "Patient",
+      "village": "Gudarlahalli",
+      "phone": "9019439727",
+      "emergency_contact": "9380526995",
+      "blood_group": "A+",
+      "existing_diseases": "",
+      "current_medicines": "",
+      "pregnancy": false,
+      "child_patient": false,
+      "allergy_type": "No",
+      "allergy": ""
+    },
+    "symptoms": "chest pain",
+    "risk": {
+      "score": 35,
+      "level_key": "medium",
+      "risk_level": "Medium Risk",
+      "factors": [
+        "Symptom matched: chest pain (+35)"
+      ],
+      "matched": [
+        "chest pain"
+      ]
+    },
+    "emergency_message": "Monitor the symptoms. If symptoms worsen, visit a healthcare center.",
+    "first_aid": [
+      "Call 108 immediately.",
+      "Make the patient sit or lie in a comfortable position.",
+      "Loosen tight clothing and keep the patient calm.",
+      "Do not give food or water if the patient is very weak or unconscious."
+    ],
+    "medicine_guidance": {
+      "suggestions": [
+        "No specific medicine suggestion. Use first-aid guidance and consult a healthcare professional."
+      ],
+      "warnings": []
+    },
+    "doctor_warning": "Please consult a qualified doctor or pharmacist before taking medicines, especially for children, pregnancy, allergies, or chronic disease.",
+    "next_steps": [
+      "Press Call 108 for emergency help if the case is serious.",
+      "Use Live Location to find nearby hospitals.",
+      "Share the risk result and symptoms with a doctor/ambulance staff."
+    ],
+    "voice_reply": "Divakar GK, your risk level is Medium Risk with score 35 out of 100. Monitor the symptoms. If symptoms worsen, visit a healthcare center."
+  },
+  {
+    "case_id": "EMR-20260604-86D7D1",
+    "ai_confidence": 69,
+    "ai_explanation": [
+      "Symptom matched: chest pain (+35)"
+    ],
+    "timestamp": "2026-06-04T03:18:52",
+    "patient": {
+      "name": "Diva",
+      "age": 21,
+      "gender": "male",
+      "user_type": "Patient",
+      "village": "Gudarlahalli",
+      "phone": "9019439727",
+      "emergency_contact": "9380526995",
+      "blood_group": "A+",
+      "existing_diseases": "",
+      "current_medicines": "",
+      "pregnancy": false,
+      "child_patient": false,
+      "allergy_type": "No",
+      "allergy": ""
+    },
+    "symptoms": "chest pain",
+    "risk": {
+      "score": 35,
+      "level_key": "medium",
+      "risk_level": "Medium Risk",
+      "factors": [
+        "Symptom matched: chest pain (+35)"
+      ],
+      "matched": [
+        "chest pain"
+      ]
+    },
+    "emergency_message": "Monitor the symptoms. If symptoms worsen, visit a healthcare center.",
+    "first_aid": [
+      "Call 108 immediately.",
+      "Make the patient sit or lie in a comfortable position.",
+      "Loosen tight clothing and keep the patient calm.",
+      "Do not give food or water if the patient is very weak or unconscious."
+    ],
+    "medicine_guidance": {
+      "suggestions": [
+        "No specific medicine suggestion. Use first-aid guidance and consult a healthcare professional."
+      ],
+      "warnings": []
+    },
+    "doctor_warning": "Please consult a qualified doctor or pharmacist before taking medicines, especially for children, pregnancy, allergies, or chronic disease.",
+    "next_steps": [
+      "Press Call 108 for emergency help if the case is serious.",
+      "Use Live Location to find nearby hospitals.",
+      "Share the risk result and symptoms with a doctor/ambulance staff."
+    ],
+    "voice_reply": "Diva, your risk level is Medium Risk with score 35 out of 100. Monitor the symptoms. If symptoms worsen, visit a healthcare center."
+  },
+  {
+    "case_id": "EMR-20260604-BC9A90",
+    "ai_confidence": 80,
+    "ai_explanation": [
+      "Symptom matched: chest pain (+35)",
+      "Symptom matched: headache (+8)"
+    ],
+    "timestamp": "2026-06-04T03:21:05",
+    "patient": {
+      "name": "Diva",
+      "age": 21,
+      "gender": "male",
+      "user_type": "Patient",
+      "village": "Gudarlahalli",
+      "phone": "9019439727",
+      "emergency_contact": "9380526995",
+      "blood_group": "A+",
+      "existing_diseases": "",
+      "current_medicines": "",
+      "pregnancy": false,
+      "child_patient": false,
+      "allergy_type": "No",
+      "allergy": ""
+    },
+    "symptoms": "chest pain headache",
+    "risk": {
+      "score": 43,
+      "level_key": "medium",
+      "risk_level": "Medium Risk",
+      "factors": [
+        "Symptom matched: chest pain (+35)",
+        "Symptom matched: headache (+8)"
+      ],
+      "matched": [
+        "chest pain",
+        "headache"
+      ]
+    },
+    "emergency_message": "Monitor the symptoms. If symptoms worsen, visit a healthcare center.",
+    "first_aid": [
+      "Call 108 immediately.",
+      "Make the patient sit or lie in a comfortable position.",
+      "Loosen tight clothing and keep the patient calm.",
+      "Do not give food or water if the patient is very weak or unconscious."
+    ],
+    "medicine_guidance": {
+      "suggestions": [
+        "Paracetamol/Acetaminophen for fever or mild pain, only as per age/weight label or doctor's advice.",
+        "ORS solution or fluids if fever is associated with weakness or dehydration."
+      ],
+      "warnings": [
+        "Avoid self-medicating with antibiotics. Avoid ibuprofen/NSAIDs in pregnancy, kidney disease, stomach ulcer, dengue suspicion, or severe dehydration unless a doctor advises."
+      ]
+    },
+    "doctor_warning": "Please consult a qualified doctor or pharmacist before taking medicines, especially for children, pregnancy, allergies, or chronic disease.",
+    "next_steps": [
+      "Press Call 108 for emergency help if the case is serious.",
+      "Use Live Location to find nearby hospitals.",
+      "Share the risk result and symptoms with a doctor/ambulance staff."
+    ],
+    "voice_reply": "Diva, your risk level is Medium Risk with score 43 out of 100. Monitor the symptoms. If symptoms worsen, visit a healthcare center."
+  },
+  {
+    "case_id": "EMR-20260604-3F66C4",
+    "ai_confidence": 80,
+    "ai_explanation": [
+      "సరిపోలిన లక్షణం: chest pain (+35)",
+      "సరిపోలిన లక్షణం: headache (+8)"
+    ],
+    "timestamp": "2026-06-04T03:21:33",
+    "patient": {
+      "name": "Diva",
+      "age": 21,
+      "gender": "male",
+      "user_type": "Patient",
+      "village": "Gudarlahalli",
+      "phone": "9019439727",
+      "emergency_contact": "9380526995",
+      "blood_group": "A+",
+      "existing_diseases": "",
+      "current_medicines": "",
+      "pregnancy": false,
+      "child_patient": false,
+      "allergy_type": "No",
+      "allergy": ""
+    },
+    "symptoms": "chest pain headache",
+    "risk": {
+      "score": 43,
+      "level_key": "medium",
+      "risk_level": "మధ్యస్థ ప్రమాదం",
+      "factors": [
+        "సరిపోలిన లక్షణం: chest pain (+35)",
+        "సరిపోలిన లక్షణం: headache (+8)"
+      ],
+      "matched": [
+        "chest pain",
+        "headache"
+      ]
+    },
+    "emergency_message": "లక్షణాలను గమనించండి. లక్షణాలు పెరిగితే ఆరోగ్య కేంద్రానికి వెళ్లండి.",
+    "first_aid": [
+      "వెంటనే 108 కు కాల్ చేయండి.",
+      "రోగిని సౌకర్యమైన స్థితిలో కూర్చోబెట్టండి లేదా పడుకోబెట్టండి.",
+      "బిగువైన బట్టలు సడలించి రోగిని ప్రశాంతంగా ఉంచండి.",
+      "రోగి చాలా బలహీనంగా లేదా స్పృహ లేకుండా ఉంటే ఆహారం లేదా నీరు ఇవ్వవద్దు."
+    ],
+    "medicine_guidance": {
+      "suggestions": [
+        "జ్వరం లేదా స్వల్ప నొప్పికి ప్యారాసిటమాల్/అసెటామినోఫెన్‌ను వయస్సు/బరువు లేబల్ లేదా డాక్టర్ సలహా ప్రకారం మాత్రమే వాడండి.",
+        "బలహీనత లేదా నీటి లోపం ఉంటే ORS లేదా ద్రవాలు తాగండి."
+      ],
+      "warnings": [
+        "ఆంటీబయాటిక్స్‌ను స్వయంగా వాడవద్దు. గర్భధారణ, కిడ్నీ వ్యాధి, కడుపు అల్సర్, డెంగ్యూ అనుమానం లేదా తీవ్రమైన నీటి లోపం ఉంటే డాక్టర్ సలహా లేకుండా ఐబుప్రోఫెన్/NSAIDs నివారించండి."
+      ]
+    },
+    "doctor_warning": "పిల్లలు, గర్భధారణ, అలెర్జీలు లేదా దీర్ఘకాలిక వ్యాధులు ఉంటే మందులు తీసుకునే ముందు అర్హత కలిగిన డాక్టర్ లేదా ఫార్మసిస్ట్‌ను సంప్రదించండి.",
+    "next_steps": [
+      "స్థితి తీవ్రమైతే 108 కు కాల్ చేయండి.",
+      "సమీప ఆసుపత్రులు కనుగొనడానికి లైవ్ లొకేషన్ వాడండి.",
+      "రిస్క్ ఫలితం మరియు లక్షణాలను డాక్టర్/అంబులెన్స్ సిబ్బందికి చూపండి."
+    ],
+    "voice_reply": "Diva, మీ ప్రమాద స్థాయి మధ్యస్థ ప్రమాదం. స్కోర్ 43 / 100. లక్షణాలను గమనించండి. లక్షణాలు పెరిగితే ఆరోగ్య కేంద్రానికి వెళ్లండి."
+  },
+  {
+    "case_id": "EMR-20260604-94120B",
+    "ai_confidence": 69,
+    "ai_explanation": [
+      "Symptom matched: headache (+8)"
+    ],
+    "timestamp": "2026-06-04T03:31:43",
+    "patient": {
+      "name": "Nandi",
+      "age": 19,
+      "gender": "male",
+      "user_type": "Patient",
+      "village": "Murugamalla",
+      "phone": "9019439727",
+      "emergency_contact": "9380526995",
+      "blood_group": "A+",
+      "existing_diseases": "",
+      "current_medicines": "",
+      "pregnancy": false,
+      "child_patient": false,
+      "allergy_type": "No",
+      "allergy": ""
+    },
+    "symptoms": "headache",
+    "risk": {
+      "score": 8,
+      "level_key": "low",
+      "risk_level": "Low Risk",
+      "factors": [
+        "Symptom matched: headache (+8)"
+      ],
+      "matched": [
+        "headache"
+      ]
+    },
+    "emergency_message": "Monitor the symptoms. If symptoms worsen, visit a healthcare center.",
+    "first_aid": [
+      "Stay calm and keep the patient safe.",
+      "Call 108 or local emergency number for serious symptoms.",
+      "Keep the patient in a comfortable position.",
+      "Reach the nearest hospital if symptoms are severe or worsening."
+    ],
+    "medicine_guidance": {
+      "suggestions": [
+        "Paracetamol/Acetaminophen for fever or mild pain, only as per age/weight label or doctor's advice.",
+        "ORS solution or fluids if fever is associated with weakness or dehydration."
+      ],
+      "warnings": [
+        "Avoid self-medicating with antibiotics. Avoid ibuprofen/NSAIDs in pregnancy, kidney disease, stomach ulcer, dengue suspicion, or severe dehydration unless a doctor advises."
+      ]
+    },
+    "doctor_warning": "Please consult a qualified doctor or pharmacist before taking medicines, especially for children, pregnancy, allergies, or chronic disease.",
+    "next_steps": [
+      "Press Call 108 for emergency help if the case is serious.",
+      "Use Live Location to find nearby hospitals.",
+      "Share the risk result and symptoms with a doctor/ambulance staff."
+    ],
+    "voice_reply": "Nandi, your risk level is Low Risk with score 8 out of 100. Monitor the symptoms. If symptoms worsen, visit a healthcare center."
+  }
+]
